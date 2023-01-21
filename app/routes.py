@@ -34,7 +34,7 @@ def ecowitt_sun_data():
 # https://github.com/iz0qwm/ecowitt_http_gateway/blob/master/index.php
 @app.route('/data/report/', methods=['POST'])
 def ecowitt_weather_data():
-    if 'date' not in request.form:
+    if 'dateutc' not in request.form:
         # it's probably a sunrise/sunset request instead
         print('Calling ecowitt_sun_data from ecowitt_weather_data:')
         pprint.pprint(request.form)
