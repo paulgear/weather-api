@@ -30,7 +30,7 @@ COPY    influxsetup/* influxsetup/
 COPY    entrypoint.sh .
 RUN     chmod 0755 entrypoint.sh
 
-RUN     adduser --disabled-password weather
+RUN     adduser --disabled-password --gecos '' --home /srv/weather-api weather
 USER    weather
 
 EXPOSE  8000
