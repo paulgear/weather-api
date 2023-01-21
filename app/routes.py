@@ -6,6 +6,7 @@
 # Application routes for the Weather API
 
 import json
+import pprint
 import time
 
 from flask import request
@@ -16,6 +17,8 @@ import weather
 
 @app.route('/data/ip_api/', methods=['POST'])
 def ecowitt_sun_data():
+    print('In ecowitt_sun_data:')
+    pprint.pprint(request.form)
     sun_data = weather.get_station_data(request.form)
     return json.dumps(sun_data)
 
@@ -26,8 +29,12 @@ def ecowitt_sun_data():
 def ecowitt_weather_data():
     if 'date' not in request.form:
         # it's probably a sunrise/sunset request instead
+        print('Calling ecowitt_sun_data from ecowitt_weather_data:')
+        pprint.pprint(request.form)
         return ecowitt_sun_data()
 
+    print('In ecowitt_weather_data:')
+    pprint.pprint(request.form)
     weather.save_station_measurements(request.form)
     return json.dumps({
         'errcode': 0,
