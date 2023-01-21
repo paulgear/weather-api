@@ -1,0 +1,41 @@
+---
+# Copyright (C) 2023 Paul D. Gear
+# License: AGPLv3
+
+# Deploy the weather-api app container and an InfluxDB TSDB service.
+# - INFLUXDB_PASSWORD must be supplied in the environment for the initial deployment,
+#   but it is not needed on subsequent restarts.
+# - LATITUDE and LONGITUDE must be supplied for all invocations in order
+#   to successfully retrieve sunrise & sunset times.
+
+services:
+  influxdb:
+    command: --reporting-disabled
+    image: influxdb:latest
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: admin
+      DOCKER_INFLUXDB_INIT_PASSWORD: ${INFLUXDB_PASSWORD}
+      DOCKER_INFLUXDB_INIT_ORG: weather
+      DOCKER_INFLUXDB_INIT_BUCKET: weather
+    expose:
+      - 8086
+    ports:
+      - "8086:8086"
+    volumes:
+      - ${PWD}/influxdata:/var/lib/influxdb2
+      - ${PWD}/influxconfig:/etc/influxdb2
+      - ${PWD}/influxsetup:/docker-entrypoint-initdb.d:ro
+
+  app:
+    environment:
+      INFLUXDB_BUCKET: weather
+      INFLUXDB_ORG: weather
+      INFLUXDB_URL: http://influxdb:8086
+      LATITUDE: ${LATITUDE}
+      LONGITUDE: ${LONGITUDE}
+    image: paulgear/weather-api:latest
+    ports:
+      - "80:8000"
+    volumes:
+      - ${PWD}/influxconfig:/influxconfig:ro
