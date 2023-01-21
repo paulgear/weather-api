@@ -34,8 +34,6 @@ def ecowitt_sun_data():
 def ecowitt_weather_data():
     if 'dateutc' not in request.form:
         # it's probably a sunrise/sunset request instead
-        print('Calling ecowitt_sun_data from ecowitt_weather_data:')
-        pprint.pprint(request.form)
         return ecowitt_sun_data()
 
     weather.save_station_measurements(request.form)
