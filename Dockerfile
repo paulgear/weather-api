@@ -30,7 +30,7 @@ COPY    influxsetup/* influxsetup/
 COPY    entrypoint.sh .
 RUN     chmod 0755 entrypoint.sh
 
-RUN     adduser weather
+RUN     adduser --disabled-password weather
 USER    weather
 
 EXPOSE  8000
