@@ -15,6 +15,13 @@ from app import app
 import weather
 
 
+# This is useful as a liveness check or for returning something
+# to management systems which auto-probe services.
+@app.route('/')
+def ok():
+    return 'OK'
+
+
 @app.route('/data/ip_api/', methods=['POST'])
 def ecowitt_sun_data():
     print('In ecowitt_sun_data:')
