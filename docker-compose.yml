@@ -34,6 +34,7 @@ services:
       INFLUXDB_URL: http://influxdb:8086
       LATITUDE: ${LATITUDE}
       LONGITUDE: ${LONGITUDE}
+      TZ: ${TZ}
     image: paulgear/weather-api:latest
     ports:
       - "80:8000"
