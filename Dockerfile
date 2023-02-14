@@ -9,6 +9,7 @@ python3-flask \
 python3-pint \
 python3-pip \
 python3-requests \
+python3-requests-cache \
 uwsgi \
 uwsgi-plugin-python3 \
 "

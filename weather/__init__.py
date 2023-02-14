@@ -27,16 +27,7 @@ def get_station_data(rodata: dict) -> dict:
     - fields=timezone,utc_offset,dst,date_sunrise,date_sunset
     This endpoint ignores the fields requested and hard codes all of the known data in the response.
     """
-    # use cache data if it's less than 8 hours old
-    if rodata['mac'] in stations and time.time() - timestamps[rodata['mac']] > 60 * 60 * 8.0:
-        return stations[rodata['mac']]
-
-    # otherwise refresh the data and keep it in cache
-    data = {}
-    data.update(sun_times.get_sun_times(default_latitude, default_longitude))
-    timestamps[rodata['mac']] = time.time()
-    stations[rodata['mac']] = data
-    return data
+    return sun_times.get_sun_times(default_latitude, default_longitude)
 
 
 def save_station_measurements(rodata: dict) -> None:
