@@ -28,12 +28,8 @@ if time_zone_name is None:
 
 # TODO: Record the results so we can show a chart of sunrise vs. sunset times over a year
 def get_sun_times(latitude, longitude, logger):
-    logger.warning(f"get_sun_times: requests_cache.is_installed()={requests_cache.is_installed()}")
-    logger.warning(f"get_sun_times: requests_cache.get_cache()={requests_cache.get_cache()}")
-
     r = requests.get(f'https://api.sunrise-sunset.org/json?lat={latitude}&lng={longitude}&formatted=0')
     data = json.loads(r.content)
-    logger.warning(f"get_sun_times: data={data}")
     sunrise = datetime.fromisoformat(data['results']['sunrise']).astimezone()
     sunset = datetime.fromisoformat(data['results']['sunset']).astimezone()
 
@@ -44,5 +40,4 @@ def get_sun_times(latitude, longitude, logger):
         'timezone': time_zone_name.replace('/', '\/'),
         'utc_offset': str(-time.timezone),
     }
-    logger.warning(f"get_sun_times: results={results}")
     return results

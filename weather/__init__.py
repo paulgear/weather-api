@@ -27,14 +27,7 @@ def get_station_data(rodata: dict, logger: object) -> dict:
     - fields=timezone,utc_offset,dst,date_sunrise,date_sunset
     This endpoint ignores the fields requested and hard codes all of the known data in the response.
     """
-    logger.warning(f"get_station_data: rodata={rodata}")
-    logger.warning(f"get_station_data: t1={time.time()}")
-
-    result = sun_times.get_sun_times(default_latitude, default_longitude, logger=logger)
-
-    logger.warning(f"get_station_data: t2={time.time()}")
-
-    return result
+    return sun_times.get_sun_times(default_latitude, default_longitude, logger=logger)
 
 
 def save_station_measurements(rodata: dict) -> None:
