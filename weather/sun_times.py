@@ -37,7 +37,8 @@ def get_sun_times(latitude, longitude, logger):
         'date_sunrise': sunrise.strftime("%H:%M"),
         'date_sunset': sunset.strftime("%H:%M"),
         'dst': str(time.daylight),
-        'timezone': time_zone_name.replace('/', '\/'),
+        'timezone': time_zone_name,
         'utc_offset': str(-time.timezone),
     }
+    logger.warning(f"get_sun_times: results={results}")
     return results
