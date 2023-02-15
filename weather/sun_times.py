@@ -16,7 +16,7 @@ import requests_cache
 
 cachetime = 60 * 60 * 8
 
-requests_cache.install_cache('sunrise_sunset_cache', backend='memory', expire_after=cachetime)
+requests_cache.install_cache('sunrise_sunset_cache', backend='sqlite', expire_after=cachetime)
 
 
 # Cache local time zone name
