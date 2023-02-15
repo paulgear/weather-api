@@ -37,7 +37,7 @@ def get_sun_times(latitude, longitude):
         'date_sunrise': sunrise.strftime("%H:%M"),
         'date_sunset': sunset.strftime("%H:%M"),
         'dst': str(time.daylight),
-        'timezone': time_zone_name.replace('/', '\\/'),
+        'timezone': time_zone_name.replace('/', '\/'),
         'utc_offset': str(-time.timezone),
     }
     return results
