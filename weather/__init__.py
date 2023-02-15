@@ -20,14 +20,23 @@ stations = {}
 timestamps = {}
 
 
-def get_station_data(rodata: dict) -> dict:
+def get_station_data(rodata: dict, logger: object) -> dict:
     """The Ecowitt station posts to this endpoint with the following variables set:
     - mac=MA:CA:DD:RE:SS:00
     - stationtype=EasyWeatherV1.5.2
     - fields=timezone,utc_offset,dst,date_sunrise,date_sunset
     This endpoint ignores the fields requested and hard codes all of the known data in the response.
     """
-    return sun_times.get_sun_times(default_latitude, default_longitude)
+    logger.warning(f"get_station_data: rodata={rodata}")
+    logger.warning(f"get_station_data: latitude={default_latitude}")
+    logger.warning(f"get_station_data: longitude={default_longitude}")
+    logger.warning(f"get_station_data: t1={time()}")
+
+    result = sun_times.get_sun_times(default_latitude, default_longitude, logger=logger)
+
+    logger.warning(f"get_station_data: t2={time()}")
+
+    return result
 
 
 def save_station_measurements(rodata: dict) -> None:
