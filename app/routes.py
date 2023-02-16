@@ -26,7 +26,6 @@ def ok():
 def ecowitt_sun_data():
     sun_data = weather.get_station_data(request.form, logger=app.logger)
     result = json.dumps(sun_data, separators=(',', ':')).replace('/', '\/')
-    app.logger.warning(f"ecowitt_sun_data: result={result}")
     return result
 
 
@@ -45,7 +44,7 @@ def ecowitt_weather_data():
         # Eventually, this should look up the timezone offset for the station in a database;
         # for now, it's just assumed to be in the same timezone as the server.  The python
         # time.timezone object is expressed in offset to UTC from local rather than offset
-        # from UTC to local, so needs to be sign-reversed for the weather station.
+        # from UTC to local, so needs to be sign-reversed.
         'UTC_offset': -time.timezone,
     })
 
