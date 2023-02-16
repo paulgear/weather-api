@@ -40,5 +40,5 @@ def get_sun_times(latitude, longitude, logger):
         'date_sunrise': sunrise.strftime("%H:%M"),
         'date_sunset': sunset.strftime("%H:%M"),
     }
-    logger.warning(f"get_sun_times: results={results}")
+    logger.warning(f"get_sun_times: results={json.dumps(results)}")
     return results
