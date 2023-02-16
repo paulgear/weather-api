@@ -25,7 +25,7 @@ def ok():
 @app.route('/data/ip_api/', methods=['POST'])
 def ecowitt_sun_data():
     sun_data = weather.get_station_data(request.form, logger=app.logger)
-    result = json.dumps(sun_data).replace('/', '\/')
+    result = json.dumps(sun_data, separators=(',', ':')).replace('/', '\/')
     app.logger.warning(f"ecowitt_sun_data: result={result}")
     return result
 
