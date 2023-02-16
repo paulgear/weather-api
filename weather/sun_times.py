@@ -34,7 +34,7 @@ def get_sun_times(latitude, longitude, logger):
     sunset = datetime.fromisoformat(data['results']['sunset']).astimezone()
 
     results = {
-        'timezone': time_zone_name,
+        'timezone': time_zone_name.replace('/', '\/'),
         'utc_offset': str(-time.timezone),
         'dst': str(time.daylight),
         'date_sunrise': sunrise.strftime("%H:%M"),
