@@ -1,2 +1,1 @@
 influxdb_client
-setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a regex DDoS - ref. https://security.snyk.io/vuln/SNYK-PYTHON-SETUPTOOLS-3180412
