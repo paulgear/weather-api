@@ -5,6 +5,7 @@
 FROM paulgear/base:latest
 
 ARG     PKGS="\
+adduser \
 python3-flask \
 python3-influxdb-client \
 python3-pint \
