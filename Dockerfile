@@ -6,6 +6,7 @@ FROM paulgear/base:latest
 
 ARG     PKGS="\
 python3-flask \
+python3-influxdb-client \
 python3-pint \
 python3-pip \
 python3-requests \
@@ -20,9 +21,6 @@ RUN     apt update && \
         rm -rf /var/lib/apt/lists/*
 
 WORKDIR /srv/weather-api
-
-COPY    *.txt .
-RUN     pip3 install --no-cache-dir -r requirements.txt
 
 COPY    app/*.py app/
 COPY    weather/*.py weather/
