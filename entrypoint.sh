@@ -19,7 +19,7 @@ while [ ! -f $INFLUXDB_TOKENFILE ]; do
     fi
 done
 
-uwsgi_python310 \
+uwsgi_python3 \
    --callable app \
    --disable-logging \
    --http-socket 0.0.0.0:8000 \
