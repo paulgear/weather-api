@@ -7,12 +7,10 @@
 # - data/ip_api -> get_station_data()
 # - data/report -> save_station_measurements()
 
-from datetime import datetime, timezone
 import os
-import time
+from datetime import datetime, timezone
 
-from weather import data, influx, sun_times
-
+from . import data, influx, sun_times
 
 default_latitude = float(os.environ['LATITUDE'])
 default_longitude = float(os.environ['LONGITUDE'])

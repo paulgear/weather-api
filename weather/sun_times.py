@@ -6,15 +6,15 @@
 # Retrieve sunrise & sunset times from api.sunrise-sunset.org and format them for
 # the weather station. LATITUDE and LONGITUDE must be set in the environment.
 
-from datetime import datetime, timezone
 import json
 import os
 import time
+from datetime import datetime, timezone
 
 import requests
 import requests_cache
 
-import influx
+from . import influx
 
 cachetime = 60 * 60 * 8
 

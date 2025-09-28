@@ -14,7 +14,6 @@ import os
 from influxdb_client import InfluxDBClient, WritePrecision
 from influxdb_client.client.write_api import SYNCHRONOUS
 
-
 # Retrieve InfluxDB connectivity information from the environment
 # and the auth token from the token file.
 influxdb_bucket = os.environ['INFLUXDB_BUCKET']
