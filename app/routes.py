@@ -9,7 +9,7 @@ import json
 import pprint
 import time
 
-from flask import request
+from flask import jsonify, request
 
 from app import app
 import weather
@@ -25,7 +25,10 @@ def ok():
 @app.route('/data/ip_api/', methods=['POST'])
 def ecowitt_sun_data():
     sun_data = weather.get_station_data(request.form, logger=app.logger)
-    result = json.dumps(sun_data, separators=(',', ':')).replace('/', '\/')
+    # The station doesn't seem to accept sun & timezone data unless it's in a particular format:
+    # JSON must have no spaces after separators, and forward slashes in the time zone name must be escaped.
+    # The field order is also assumed to be significant - see sun_times.get_sun_data().
+    result = jsonify(sun_data, separators=(',', ':')).replace('/', '\/')
     return result
 
 

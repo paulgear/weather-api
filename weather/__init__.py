@@ -25,7 +25,7 @@ def get_station_data(rodata: dict, logger: object) -> dict:
     - mac=MA:CA:DD:RE:SS:00
     - stationtype=EasyWeatherV1.5.2
     - fields=timezone,utc_offset,dst,date_sunrise,date_sunset
-    This endpoint ignores the fields requested and hard codes all of the known data in the response.
+    This endpoint ignores the fields requested and hard codes the data in the response.
     """
     return sun_times.get_sun_times(default_latitude, default_longitude, logger=logger)
 
@@ -47,4 +47,4 @@ def save_station_measurements(rodata: dict) -> None:
     data.convert_date(weather_data)
     data.convert_metric(weather_data)
     data.rename(weather_data)
-    influx.write(weather_data)
+    influx.write('weather', weather_data)

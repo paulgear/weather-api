@@ -49,7 +49,7 @@ def extract_tags(data: dict) -> dict:
     return fields
 
 
-def write(data: dict) -> None:
+def write(measurement: str, data: dict) -> None:
     """Write the data to InfluxDB at second (coarsest) precision, supplying the tags and numeric fields"""
     timestamp = int(data['date'].timestamp())
     del data['date']
@@ -59,7 +59,7 @@ def write(data: dict) -> None:
     # TODO: Add check for unknown fields
     write_client.write(influxdb_bucket, influxdb_org, {
         'fields': fields,
-        'measurement': 'weather',
+        'measurement': measurement,
         'tags': tags,
         'time': timestamp,
     }, write_precision=WritePrecision.S)
