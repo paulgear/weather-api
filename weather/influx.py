@@ -16,14 +16,14 @@ from influxdb_client.client.write_api import SYNCHRONOUS
 
 # Retrieve InfluxDB connectivity information from the environment
 # and the auth token from the token file.
-influxdb_bucket = os.environ['INFLUXDB_BUCKET']
-influxdb_org = os.environ['INFLUXDB_ORG']
-influxdb_tokenfile = os.environ['INFLUXDB_TOKENFILE']
-influxdb_url = os.environ['INFLUXDB_URL']
+influxdb_bucket = os.environ["INFLUXDB_BUCKET"]
+influxdb_org = os.environ["INFLUXDB_ORG"]
+influxdb_tokenfile = os.environ["INFLUXDB_TOKENFILE"]
+influxdb_url = os.environ["INFLUXDB_URL"]
 
-with open(influxdb_tokenfile, 'r') as f:
+with open(influxdb_tokenfile, "r") as f:
     json_data = json.load(f)
-    influxdb_token = json_data['token']
+    influxdb_token = json_data["token"]
 
 # Intialise the InfluxDB client
 influxdb_client = InfluxDBClient(
@@ -50,15 +50,20 @@ def extract_tags(data: dict) -> dict:
 
 def write(measurement: str, data: dict) -> None:
     """Write the data to InfluxDB at second (coarsest) precision, supplying the tags and numeric fields"""
-    timestamp = int(data['date'].timestamp())
-    del data['date']
+    timestamp = int(data["date"].timestamp())
+    del data["date"]
 
     fields = extract_fields(data)
     tags = extract_tags(data)
     # TODO: Add check for unknown fields
-    write_client.write(influxdb_bucket, influxdb_org, {
-        'fields': fields,
-        'measurement': measurement,
-        'tags': tags,
-        'time': timestamp,
-    }, write_precision=WritePrecision.S)
+    write_client.write(
+        influxdb_bucket,
+        influxdb_org,
+        {
+            "fields": fields,
+            "measurement": measurement,
+            "tags": tags,
+            "time": timestamp,
+        },
+        write_precision=WritePrecision.S,
+    )

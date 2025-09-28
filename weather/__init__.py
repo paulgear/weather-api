@@ -12,8 +12,8 @@ from datetime import datetime, timezone
 
 from . import data, influx, sun_times
 
-default_latitude = float(os.environ['LATITUDE'])
-default_longitude = float(os.environ['LONGITUDE'])
+default_latitude = float(os.environ["LATITUDE"])
+default_longitude = float(os.environ["LONGITUDE"])
 stations = {}
 timestamps = {}
 
@@ -36,7 +36,7 @@ def save_station_measurements(rodata: dict) -> None:
      - rename fields to standardised readable names
     Then save to influxdb."""
     weather_data = {
-        'date_received': datetime.now(timezone.utc),
+        "date_received": datetime.now(timezone.utc),
     }
     weather_data.update(rodata)
     data.lower(weather_data)
@@ -45,4 +45,4 @@ def save_station_measurements(rodata: dict) -> None:
     data.convert_date(weather_data)
     data.convert_metric(weather_data)
     data.rename(weather_data)
-    influx.write('weather', weather_data)
+    influx.write("weather", weather_data)
